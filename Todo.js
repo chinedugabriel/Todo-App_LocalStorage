@@ -65,7 +65,7 @@
                     <td>${val.title}</td>
                     <td>${val.description}</td>
                     <td>Not Completed</td>
-                    <td><button class="btn">Done</button></td>
+                    <td><button class="btn" onclick = "Done_btn()">Done</button></td>
                     <td><button class="btn" onclick = "edit(${index})">Edit</button> &nbsp; &nbsp;<button  class="btn">View</button></td>
                   </tr>
                 `
@@ -106,3 +106,7 @@
         discardBtn();
     }
     
+    // The function below belongs to Done button for status_Action
+const Done_btn = () => {
+    // alert("working");
+}
