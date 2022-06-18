@@ -1,14 +1,15 @@
-
+  
     let check = true;
     // console.log(check);
     let showData_payLoad = JSON.parse(localStorage.getItem("payLoad"));
+
     let data = showData_payLoad !==[] ? showData_payLoad : (
         [{
         title : "learn React",
         description :" this would",
-        completed : false
+        completed : true //false
     }]
-    );  
+    );  //console.log(data[2].title)
 
     // the function below belongs to the Add button (Add Todo)
     const addBtn = ()=>{
@@ -29,7 +30,7 @@
 
         if(check == true){
 
-            data = [...data, {
+            data = [data, {
             title : title.value,
             description : description.value,
             completed : false
@@ -64,8 +65,8 @@
                     <td>${index+ 1}</td>
                     <td>${val.title}</td>
                     <td>${val.description}</td>
-                    <td>Not Completed</td>
-                    <td><button class="btn" onclick = "Done_btn()">Done</button></td>
+                    <td id = "status">${val.status ==true ? "Completed": "Not Completed"}</td>
+                    <td><button class="btn ${val.status && "success"}" onclick = "pending_btn(${index})" id="pending">${val.status == true ? "Done" : "pending"}</button></td>
                     <td><button class="btn" onclick = "edit(${index})">Edit</button> &nbsp; &nbsp;<button  class="btn">View</button></td>
                   </tr>
                 `
@@ -106,7 +107,27 @@
         discardBtn();
     }
     
-    // The function below belongs to Done button for status_Action
-const Done_btn = () => {
+    //The function below belongs to Done button for status_Action
+const pending_btn = (id) => {
     // alert("working");
+    
+    let pending_btn = document.getElementById("pending");
+    let task_status = document.getElementById("status");
+    // task_status.classList.add("success");
+    
+     data.filter((value, index)=>{ 
+        
+        if(id == index) {
+
+            value.status == false ? value.status = true : value.status = false
+             
+            
+        }
+    })
+    
+        localStorage.setItem("payLoad", JSON.stringify(data));
+    
+    discardBtn();
+
+
 }
